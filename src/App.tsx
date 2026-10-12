@@ -1,17 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
   // All states
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [bmi, setBmi] = useState(null);
-  const [message, setMessage] = useState("");
+  const [weight, setWeight] = useState<string>("");
+  const [height, setHeight] = useState<string>("");
+  const [bmi, setBmi] = useState<string | null>(null);
+  const [message, setMessage] = useState<string>("");
 
   // BMI calculation
-  const calcBmi = (e) => {
+  const calcBmi = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const numWeight = parseFloat(weight);
@@ -25,7 +25,7 @@ function App() {
       return;
     }
 
-    let calculatedBmi = (numWeight / (numHeight * numHeight)) * 703;
+    const calculatedBmi = (numWeight / (numHeight * numHeight)) * 703;
     const finalBmi = calculatedBmi.toFixed(1);
     setBmi(finalBmi);
 
@@ -56,7 +56,7 @@ function App() {
     }
   };
 
-  // Reset/Reload State
+  // Reload State
   const reload = () => {
     setWeight("");
     setHeight("");
@@ -67,7 +67,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      {/* React Toastify Container */}
+      {/* React Toastify */}
       <ToastContainer />
 
       <div className="card w-full max-w-md bg-gray-200 shadow-2xl border border-base-300">
@@ -93,7 +93,7 @@ function App() {
                 type="number"
                 step="any"
                 placeholder="e.g. 150"
-                className="input outline-none w-full "
+                className="input outline-none w-full"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
               />
@@ -108,13 +108,13 @@ function App() {
                 type="number"
                 step="any"
                 placeholder="e.g. 68"
-                className="input input-bordered outline-none  w-full "
+                className="input input-bordered outline-none w-full"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
               />
             </div>
 
-            {/* Buttons */}
+/            {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button
                 type="submit"
@@ -125,7 +125,7 @@ function App() {
               <button
                 type="button"
                 onClick={reload}
-                className="btn bg-green-700  text-gray-200 flex-1"
+                className="btn bg-green-700 text-gray-200 flex-1"
               >
                 Reset
               </button>
